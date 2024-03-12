@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}">
+
+</head>
+<body th:fragment="header">
+<div id="header" class="container-fluid"
+     style="position: sticky; top: 0; z-index: 99; background: black;">
+    <!--    header-->
+    <div class="row header">
+
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+                        aria-controls="navbarTogglerDemo03" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                        <div class="nav-item dropdown">
+                            <a class="nav-link"
+                               th:href="@{/}"
+                               id="navbarDropdownCustomer" role="button" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false"
+                               style="color: #a8a8a8"> Home |</a>
+                        </div>
+
+                        <div class="nav-item dropdown">
+                                <span style="color: #a8a8a8" class="nav-link dropdown-toggle" role="button"
+                                      data-bs-toggle="dropdown" aria-expanded="false">
+                                    Main Management
+                                </span>
+
+                            <ul class="dropdown-menu bg-dark">
+                                <li><a class="nav-link text-white" th:href="@{/main/list}">Show list</a></li>
+                                <!--                                    <li><a class="nav-link text-white" th:href="@{/main/create}">Add new</a> </li>-->
+
+                            </ul>
+                        </div>
+
+                        <div class="nav-item dropdown">
+                                <span style="color: #a8a8a8" class="nav-link dropdown-toggle" role="button"
+                                      data-bs-toggle="dropdown" aria-expanded="false">
+                                    Sub Management
+                                </span>
+
+                            <ul class="dropdown-menu bg-dark">
+                                <li><a class="nav-link text-white" th:href="@{/sub/list}">Show list</a></li>
+                                <!--                                    <li><a class="nav-link text-white" th:href="@{/sub/create}">Add new</a> </li>-->
+
+                            </ul>
+                        </div>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.dropdown-toggle').click(function () {
+            $('.dropdown-menu').toggleClass('show');
+        });
+    });
+</script>
+</html>

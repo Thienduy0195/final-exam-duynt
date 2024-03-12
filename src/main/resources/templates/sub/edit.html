@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update customer</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/create-customer.css}">
+</head>
+<body style="background-color: #121212;">
+
+<div th:replace="commons/header :: header"></div>
+
+<div class="container-fluid d-flex justify-content-center mt-3">
+    <div class="login-form">
+        <h3 class="text-center text-white">UPDATE CUSTOMER</h3>
+        <form
+                th:action="@{/templates/sub/{id}(id=${customerDto.getCustomerId()})}"
+                th:object="${customerDto}"
+                method="post">
+            <div class="row my-4">
+                <div class="hidden">
+                    <input th:field="*{customerId}" type="text"
+                           class="form-control input" id="customerId"
+                           autocomplete="off"/>
+                </div>
+                <div class="col-md-6" style="padding-right: 15px">
+                    <div class="form-floating textbox mb-4">
+
+                        <input th:field="*{customerName}" type="text" class="form-control input"
+                               id="customerName" placeholder="Enter the full name..." autocomplete="off"/>
+                        <label for="customerName" style="color: white"> Full name <span
+                                class="text-danger">*</span>
+                        </label>
+                        <span class="text-danger" th:if="${#fields.hasErrors('customerName')}"
+                              th:errors="*{customerName}"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6" style="padding-right: 15px">
+                    <div class="form-floating textbox mb-4">
+                        <input th:field="*{address}" type="text" class="form-control input"
+                               id="address" placeholder="Họ và tên" autocomplete="off"/>
+                        <label for="address" style="color: white"> Address <span
+                                class="text-danger">*</span>
+                        </label>
+                        <errors path="address" cssClass="text-danger"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row my-4">
+
+                <div class="col-md-6" style="padding-right: 15px">
+                    <div class="form-floating textbox mb-4">
+                        <input th:field="*{email}" type="email" class="form-control input"
+                               id="email" placeholder="example@gmail.com" autocomplete="off"
+                               />
+                        <label for="email" style="color: white"> Email <span
+                                class="text-danger">*</span>
+                        </label>
+                        <errors path="email" cssClass="text-danger"/>
+                    </div>
+                </div>
+                <div class="col-md-6 " style="padding-right: 15px">
+                    <div class="form-floating textbox mb-4">
+                        <input th:field="*{phoneNumber}" type="text"
+                               class="form-control input" id="phone-number"
+                               placeholder="Họ và tên" autocomplete="off"
+                               />
+                        <label for="phone-number" style="color: white"> Phone <span
+                                class="text-danger">*</span>
+                        </label>
+                        <errors path="phoneNumber" cssClass="text-danger"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row my-4">
+                <div class="col-md-4 my-4"></div>
+                <div class="col-md-4" style="text-align: center; width: 100%">
+                    <button type="submit" name="button"
+                            class="btn btn-primary btn-responsive w-25" style="height: 40px">Update
+                    </button>
+
+                    <a href="${pageContext.request.contextPath}/customer/list">
+                        <button name="button"
+                                class="btn btn-outline-light btn-responsive
+        w-25 ms-3"
+                                style="height: 40px">Cancel
+                        </button>
+                    </a>
+
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div th:replace="commons/footer :: footer"></div>
+</body>
+
+
+</html>

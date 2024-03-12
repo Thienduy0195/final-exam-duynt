@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add new</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/create-customer.css}">
+</head>
+<body style="background-color: #121212;">
+<div th:replace="commons/header :: header"></div>
+<div class="container-fluid d-flex justify-content-center mt-3">
+    <div class="login-form">
+        <h3 class="text-center text-white">ADD NEW CUSTOMER</h3>
+        <form class="internet-form"
+              th:action="@{/main/create}"
+              th:object="${mainDTO}"
+              method="post">
+            <div class="row my-4">
+                <div class="col-md-3" style="padding-right: 15px">
+                    <div class="form-floating textbox mb-4">
+                        <input th:field="*{cccd}" type="text"
+                               class="form-control input" id="cccd"
+                               placeholder="Họ và tên" autocomplete="off"
+                               onblur="validateByJS(this.id,'cccd',this.value)"
+                        />
+                        <label for="cccd" style="color: white"> cccd <span class="text-danger">*</span>
+                        </label>
+                        <span id="cccd1" class="text-danger">
+                            <span class="text-danger" th:if="${#fields.hasErrors('cccd')}" th:errors="*{cccd}"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-6" style="padding-right: 15px">
+                    <div class="form-floating textbox mb-4">
+                        <input th:field="*{ngayTiem}" type="date" class="form-control input"
+                               id="ngayTiem" placeholder="Họ và tên" autocomplete="off"
+                               onblur="validateByJS(this.id,'ngayTiem',this.value)"
+                        />
+                        <label for="ngayTiem" style="color: white"> ngayTiem <span
+                                class="text-danger">*</span>
+                        </label>
+                        <span id="ngayTiem1" class="text-danger">
+                         <span class="text-danger" th:if="${#fields.hasErrors('ngayTiem')}" th:errors="*{ngayTiem}"></span>
+                        </span>
+
+
+                    </div>
+                </div>
+
+                <div class="col-md-3" style="padding-right: 15px">
+                    <div class="form-floating textbox mb-4">
+                        <input th:field="*{tenVacXin}" type="text"
+                               class="form-control input" id="tenVacXin"
+                               placeholder="Họ và tên" autocomplete="off"
+                               onblur="validateByJS(this.id,'tenVacXin',this.value)"
+                        />
+                        <label for="tenVacXin" style="color: white"> tenVacXin <span
+                                class="text-danger">*</span>
+                        </label>
+                        <span id="tenVacXin1" class="text-danger">
+                        <span class="text-danger" th:if="${#fields.hasErrors('tenVacXin')}" th:errors="*{tenVacXin}"></span>
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row my-4">
+                <div class="col-md-4 my-4"></div>
+                <div class="col-md-4" style="text-align: center; width: 100%">
+                    <button type="submit" name="button" id="submitBtn"
+                            class="btn btn-primary btn-responsive w-25" style="height: 40px">Add
+                        new
+                    </button>
+
+                    <a th:href="@{/main/list}"
+                       class="w-25 btn btn-outline-light btn-responsive w-25 ms-3"
+                       style="height: 40px"> Cancel </a>
+
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div th:replace="commons/footer :: footer"></div>
+</body>
+
+
+<script>
+
+    let valid = [];
+    function validateByJS(id, nameInput, valueInput) {
+        const index = valid.findIndex(obj => obj.hasOwnProperty(id));
+        let checkVar = checkValidate(valueInput,nameInput)
+        console.log(checkVar)
+        if (checkVar !== "") {
+            if (index !== -1) {
+                valid[index][id]= true
+                console.log(valid)
+            }else {
+                valid = [...valid, {[id]: true }];
+                console.log(valid);
+            }
+            let element = document.getElementById(id+"1");
+            if (element) {
+                element.innerText = checkVar;
+            }else {
+                console.log("NO element was found!");
+            }
+        } else {
+            console.log("index: ", index)
+            if (index !== -1) {
+                valid[index][id]= false
+                document.getElementById(id+"1").innerText=""
+                console.log(valid);
+            }
+        }
+        let check = true
+        valid.forEach(item=> {
+
+            if(item[Object.keys(item)[0]]){
+                document.getElementById("submitBtn").disabled = true
+                check= false
+            }
+
+        })
+        if(check) {
+            document.getElementById("submitBtn").disabled = false
+        }
+    }
+
+    function checkValidate(value, nameValidate) {
+
+        const codeRegex = /^CUS\d{5}$/;
+
+        if(value === "" || value === 0 ) {
+            return "Required!";
+        }
+
+        if(nameValidate === 'customerId') {
+            if(!value.match(codeRegex)) {
+                return "Wrong format CUSxxxxx";
+            }
+        }
+
+        return "";
+
+    }
+
+</script>
+
+</html>

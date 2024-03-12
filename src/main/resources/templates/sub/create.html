@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add new</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/create-customer.css}">
+</head>
+<body style="background-color: #121212;">
+<div th:replace="commons/header :: header"></div>
+<div class="container-fluid d-flex justify-content-center mt-3">
+    <div class="login-form">
+        <h3 class="text-center text-white">ADD NEW</h3>
+        <form class="internet-form"
+              th:action="@{/sub/create}"
+              th:object="${subDTO}"
+              method="post">
+            <div class="row my-4">
+                <div class="col-md-3" style="padding-right: 15px">
+                    <div class="form-floating textbox mb-4">
+                        <input th:field="*{cccd}" type="text"
+                               class="form-control input" id="cccd"
+                               placeholder="Họ và tên" autocomplete="off"
+                               onblur="validateByJS(this.id,'cccd',this.value)"
+                               th:required="${true}"
+                        />
+                        <label for="cccd" style="color: white"> cccd <span class="text-danger">*</span>
+                        </label>
+                        <span id="cccd1" class="text-danger">
+                            <span class="text-danger" th:if="${#fields.hasErrors('cccd')}" th:errors="*{cccd}"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-6" style="padding-right: 15px">
+                    <div class="form-floating textbox mb-4">
+                        <input th:field="*{hoTen}" type="text" class="form-control input"
+                               id="hoTen" placeholder="Họ và tên" autocomplete="off"
+                               onblur="validateByJS(this.id,'hoTen',this.value)"
+                               th:required="${true}"
+                        />
+                        <label for="hoTen" style="color: white"> hoTen <span
+                                class="text-danger">*</span>
+                        </label>
+                        <span id="hoTen1" class="text-danger">
+                         <span class="text-danger" th:if="${#fields.hasErrors('hoTen')}" th:errors="*{hoTen}"></span>
+                        </span>
+
+
+                    </div>
+                </div>
+
+                <div class="col-md-3" style="padding-right: 15px">
+                    <div class="form-floating textbox mb-4">
+                        <input th:field="*{ngaySinh}" type="date"
+                               class="form-control input" id="ngaySinh"
+                               placeholder="Họ và tên" autocomplete="off"
+                               onblur="validateByJS(this.id,'ngaySinh',this.value)"
+                               th:required="${true}"
+                        />
+                        <label for="ngaySinh" style="color: white"> ngaySinh <span
+                                class="text-danger">*</span>
+                        </label>
+                        <span id="ngaySinh1" class="text-danger">
+                        <span class="text-danger" th:if="${#fields.hasErrors('ngaySinh')}"
+                              th:errors="*{ngaySinh}"></span>
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row my-4">
+                <div class="col-md-4" style="padding-right: 15px">
+                    <div class="form-floating textbox mb-4">
+                        <select class="form-control input" id="gioiTinh" th:field="*{gioiTinh}" th:required="${true}">
+                            <!-- Định nghĩa các option cho dropdown list -->
+                            <option value="">Chọn giới tính</option>
+                            <option value="Nam">Nam</option>
+                            <option value="Nữ">Nữ</option>
+                            <option value="Khác">Khác</option>
+                        </select>
+
+                        <!--                        <input th:field="*{gioiTinh}" type="text"-->
+                        <!--                               class="form-control input" id="gioiTinh"-->
+                        <!--                               placeholder="Họ và tên" autocomplete="off"-->
+                        <!--                               onblur="validateByJS(this.id,'cccd',this.value)"-->
+                        <!--                        />-->
+                        <label for="gioiTinh" style="color: white"> gioiTinh <span class="text-danger">*</span>
+                        </label>
+                        <span id="gioiTinh1" class="text-danger">
+                            <span class="text-danger" th:if="${#fields.hasErrors('gioiTinh')}"
+                                  th:errors="*{gioiTinh}"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-4" style="padding-right: 15px">
+                    <div class="form-floating textbox mb-4">
+                        <input th:field="*{soDienThoai}" type="text" class="form-control input"
+                               id="soDienThoai" placeholder="Họ và tên" autocomplete="off"
+                               onblur="validateByJS(this.id,'soDienThoai',this.value)"
+                               th:required="${true}"
+                        />
+                        <label for="hoTen" style="color: white"> soDienThoai <span
+                                class="text-danger">*</span>
+                        </label>
+                        <span id="soDienThoai1" class="text-danger">
+                         <span class="text-danger" th:if="${#fields.hasErrors('soDienThoai')}"
+                               th:errors="*{soDienThoai}"></span>
+                        </span>
+
+
+                    </div>
+                </div>
+
+                <div class="col-md-4" style="padding-right: 15px">
+                    <div class="form-floating textbox mb-4">
+                        <input th:field="*{email}" type="email"
+                               class="form-control input" id="email"
+                               placeholder="Họ và tên" autocomplete="off"
+                               onblur="validateByJS(this.id,'email',this.value)"
+                        />
+                        <label for="email" style="color: white"> email <span
+                                class="text-danger">*</span>
+                        </label>
+                        <span id="email1" class="text-danger">
+                        <span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row my-4">
+                <div class="col-md-4" style="padding-right: 15px">
+                    <div class="form-floating textbox mb-4">
+                        <input th:field="*{soTheBhyt}" type="text"
+                               class="form-control input" id="soTheBhyt"
+                               placeholder="Họ và tên" autocomplete="off"
+                               onblur="validateByJS(this.id,'soTheBhyt',this.value)"
+                        />
+                        <label for="soTheBhyt" style="color: white"> soTheBhyt <span class="text-danger">*</span>
+                        </label>
+                        <span id="soTheBhyt1" class="text-danger">
+                            <span class="text-danger" th:if="${#fields.hasErrors('soTheBhyt')}"
+                                  th:errors="*{soTheBhyt}"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-4" style="padding-right: 15px">
+                    <div class="form-floating textbox mb-4">
+                        <input th:field="*{ngheNghiep}" type="text" class="form-control input"
+                               id="ngheNghiep" placeholder="Họ và tên" autocomplete="off"
+                               onblur="validateByJS(this.id,'ngheNghiep',this.value)"
+                        />
+                        <label for="hoTen" style="color: white">ngheNghiep<span
+                                class="text-danger">*</span>
+                        </label>
+                        <span id="ngheNghiep1" class="text-danger">
+                         <span class="text-danger" th:if="${#fields.hasErrors('ngheNghiep')}"
+                               th:errors="*{hoTen}"></span>
+                        </span>
+
+
+                    </div>
+                </div>
+
+                <div class="col-md-4" style="padding-right: 15px">
+                    <div class="form-floating textbox mb-4">
+                        <input th:field="*{diaChi}" type="text"
+                               class="form-control input" id="diaChi"
+                               placeholder="Họ và tên" autocomplete="off"
+                               onblur="validateByJS(this.id,'diaChi',this.value)"
+                        />
+                        <label for="diaChi" style="color: white"> diaChi <span
+                                class="text-danger">*</span>
+                        </label>
+                        <span id="diaChi1" class="text-danger">
+                        <span class="text-danger" th:if="${#fields.hasErrors('diaChi')}" th:errors="*{diaChi}"></span>
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row my-4">
+                <div class="col-md-4 my-4"></div>
+                <div class="col-md-4" style="text-align: center; width: 100%">
+                    <button type="submit" name="button" id="submitBtn"
+                            class="btn btn-primary btn-responsive w-25" style="height: 40px">Add
+                        new
+                    </button>
+
+                    <a th:href="@{/sub/list}"
+                       class="w-25 btn btn-outline-light btn-responsive w-25 ms-3"
+                       style="height: 40px"> Cancel </a>
+
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div th:replace="commons/footer :: footer"></div>
+</body>
+
+
+<script>
+
+    let valid = [];
+
+    function validateByJS(id, nameInput, valueInput) {
+        const index = valid.findIndex(obj => obj.hasOwnProperty(id));
+        let checkVar = checkValidate(valueInput, nameInput)
+        console.log(checkVar)
+        if (checkVar !== "") {
+            if (index !== -1) {
+                valid[index][id] = true
+                console.log(valid)
+            } else {
+                valid = [...valid, {[id]: true}];
+                console.log(valid);
+            }
+            let element = document.getElementById(id + "1");
+            if (element) {
+                element.innerText = checkVar;
+            } else {
+                console.log("NO element was found!");
+            }
+        } else {
+            console.log("index: ", index)
+            if (index !== -1) {
+                valid[index][id] = false
+                document.getElementById(id + "1").innerText = ""
+                console.log(valid);
+            }
+        }
+        let check = true
+        valid.forEach(item => {
+
+            if (item[Object.keys(item)[0]]) {
+                document.getElementById("submitBtn").disabled = true
+                check = false
+            }
+
+        })
+        if (check) {
+            document.getElementById("submitBtn").disabled = false
+        }
+    }
+
+    function checkValidate(value, nameValidate) {
+
+        const codeRegex = /^CUS\d{5}$/;
+
+        if (value === "" || value === 0) {
+            return "Required!";
+        }
+
+        if (nameValidate === 'customerId') {
+            if (!value.match(codeRegex)) {
+                return "Wrong format CUSxxxxx";
+            }
+        }
+
+        if (nameValidate === 'ngaySinh') {
+            var birthdayDate = new Date(value);
+            var currentDate = new Date();
+            if (birthdayDate >= currentDate) {
+                return "Ngay sinh phai truoc ngay hien tai!";
+            }
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+</html>

@@ -16,6 +16,6 @@ public interface IMainService {
 
   Optional<TiemChung> findById(Integer id);
 
-  Long countSL(Person sub);
+  Long countSL(String cccd);
 
 }

@@ -51,8 +51,8 @@ public class MainServiceImpl implements IMainService {
     }
 
     @Override
-    public Long countSL(Person sub) {
-        return mainMapper.countSL(sub.getCccd());
+    public Long countSL(String cccd) {
+        return mainMapper.countSL(cccd);
     }
 
 }

@@ -11,6 +11,8 @@ import java.util.List;
 public interface ISubService {
     void update(Person item);
 
+    Boolean modify(String id, Integer status);
+
     void save(Person item);
 
     List<Person> findAll();
@@ -19,7 +21,7 @@ public interface ISubService {
 
     Person findById(String id);
 
-    List<SubDTO> search(String option1);
+    List<SubDTO> search(String option1, String option2);
 
     Float tinhTongTien(TiemChung lotrinh, Integer soluongVe);
 

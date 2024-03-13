@@ -42,12 +42,12 @@
                                             placeholder="Enter name to search">
                                 </div>
 
-<!--                                <div class="col-4">-->
+                                <div class="col-4">
 
-<!--                                    <input id="address" type="text" name="searchAddress"-->
-<!--                                           class="input-search form-control w-100" th:value="${searchAddress }"-->
-<!--                                           placeholder="Enter address to search"/>-->
-<!--                                </div>-->
+                                    <input id="count" type="number" name="count"
+                                           class="input-search form-control w-100" th:value="${count}"
+                                           placeholder="Enter number"/>
+                                </div>
                                 <div class="col-4">
                                     <button type="submit"
                                             class="btn btn-outline-secondary w-20 classDisabled">
@@ -78,18 +78,18 @@
                 <thead>
                 <tr>
                     <th class="text-center">#</th>
-                    <th class="th-w15" scope="col">Cccd</th>
-                    <th class="th-w15" scope="col">HoTen</th>
-                    <th class="th-w15" scope="col">NgaySinh</th>
-                    <th class="th-w15" scope="col">GioiTinh</th>
-                    <th class="th-w15" scope="col">SoDienThoai</th>
-                    <th class="th-w15" scope="col">Email</th>
-                    <th class="th-w15" scope="col">SoTheBhyt</th>
-                    <th class="th-w10" scope="col">NgheNghiep</th>
-                    <th class="th-w10" scope="col">DiaChi</th>
-                    <th class="th-w20" scope="col">NgayDangKy</th>
-                    <th class="th-w20" scope="col">soLanTiem</th>
-                    <th class="th-w20" scope="col">ngayTiemGanNhat</th>
+                    <th scope="col">Cccd</th>
+                    <th scope="col">HoTen</th>
+                    <th scope="col">NgaySinh</th>
+                    <th scope="col">GioiTinh</th>
+                    <th scope="col">SoDienThoai</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">SoTheBhyt</th>
+                    <th scope="col">NgheNghiep</th>
+                    <th scope="col">DiaChi</th>
+                    <th scope="col">NgayDangKy</th>
+                    <th scope="col">soLanTiem</th>
+                    <th scope="col">ngayTiemGanNhat</th>
                     <th scope="col">ACTION</th>
                 </tr>
                 </thead>
@@ -116,18 +116,12 @@
                     </a>
 
                         <button type="button" class="btn btn-outline-secondary"
-                                data-bs-toggle="modal" data-bs-tar="#exampleModal"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal"
                                 th:attr="data-customer-id=${item.cccd}, data-customer-name=${item.hoTen}"
-                                onclick="showModalDelete(this.Attribute('data-customer-id'), this.Attribute('data-customer-name'))">
+                                onclick="showModalDelete(this.getAttribute('data-customer-id'), this.getAttribute('data-customer-name'))">
                             <i class="fa-solid fa-trash"></i>
                         </button>
-
-                        <a
-                                th:href="@{/sub/history/{id}(id=${item.cccd})}">
-                            <button type="button" class="btn btn-outline-secondary ">
-                                <i class="fa-solid fa-gears"></i>
-                            </button>
-                        </a></td>
+                    </td>
                 </tr>
 
                 </tbody>
@@ -240,10 +234,10 @@
 
 
 <script>
-    window.onload = function  {
-        if ($('#message').val != null && $('#message').val != "") {
-            $("#modalAlertMes").html($('#message').val);
-            $(document).ready(function  {
+    window.onload = function ()  {
+        if ($('#message').val() != null && $('#message').val() != "") {
+            $("#modalAlertMes").html($('#message').val());
+            $(document).ready(function () {
                 $('#modalAlert').modal("show")
             })
         }
@@ -252,8 +246,8 @@
 
 <script>
     function showModalDelete(a, b) {
-        document.ElementById("delete_modal").innerText = b;
-        document.ElementById("sendId").value = a;
+        document.getElementById("delete_modal").innerText = b;
+        document.getElementById("sendId").value = a;
     }
 </script>
 

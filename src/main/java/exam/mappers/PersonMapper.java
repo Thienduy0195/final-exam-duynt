@@ -101,5 +101,7 @@ public interface PersonMapper {
 
     List<SubDTO> findAllMapDTO();
 
-    List<SubDTO> search(String searchName);
+    List<SubDTO> search(String searchName, String count);
+
+    void modify(String id, Integer status);
 }

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View history using computers and services</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script
+            src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/customer-list.css}">
+
+</head>
+<body>
+
+<div th:replace="commons/header :: header"></div>
+<div class="container-fluid mt-4" id="table-computer">
+    <div>
+        <div class="row">
+            <h2 class="text-center text-white">MANAGEMENT</h2>
+            <div class=" text-white mt-2">
+                <!--        row search 1-->
+                <div class="row" style="height: 80px">
+
+                    <div class="row pr-0">
+                        <div class="col-10">
+                            <!--                            <form class="row"-->
+                            <!--                                  th:action="@{/sub/search}"-->
+                            <!--                                  method="">-->
+                            <!--                                <div class="col-4">-->
+                            <!--                                    &lt;!&ndash;                                    <input type="hidden" name="page" th:value="${1}"/>&ndash;&gt;-->
+
+                            <!--                                    <input-->
+                            <!--                                            id="nameCustomer" type="text" name="searchName"-->
+                            <!--                                            th:value="${searchName}" class="input-search form-control w-100"-->
+                            <!--                                            placeholder="Enter name to search">-->
+                            <!--                                </div>-->
+
+                            <!--                                <div class="col-4">-->
+
+                            <!--                                    <input id="count" type="number" name="count"-->
+                            <!--                                           class="input-search form-control w-100" th:value="${count}"-->
+                            <!--                                           placeholder="Enter number"/>-->
+                            <!--                                </div>-->
+                            <!--                                <div class="col-4">-->
+                            <!--                                    <button type="submit"-->
+                            <!--                                            class="btn btn-outline-secondary w-20 classDisabled">-->
+                            <!--                                        Search-->
+                            <!--                                    </button>-->
+                            <!--                                    <button type="reset" style="margin-left: 15px"-->
+                            <!--                                            class="btn btn-outline-secondary w-20 classDisabled ">-->
+                            <!--                                        <i class="fa-solid fa-arrows-rotate"></i>-->
+                            <!--                                    </button>-->
+                            <!--                                </div>-->
+                            <!--                            </form>-->
+                        </div>
+                        <div class="col-2 d-flex justify-content-end">
+                            <a th:href="@{/sub/create}">
+                                <button class="btn btn-outline-secondary">Add new</button>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  table-->
+    <div style="height: 370px">
+        <div style="min-height: 332px" class="table-responsive">
+            <table class="table table-dark w-100">
+                <thead>
+                <tr>
+                    <th class="text-center">#</th>
+                    <th scope="col">Cccd</th>
+                    <th scope="col">HoTen</th>
+                    <th scope="col">NgaySinh</th>
+                    <th scope="col">GioiTinh</th>
+                    <th scope="col">SoDienThoai</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">SoTheBhyt</th>
+                    <th scope="col">NgheNghiep</th>
+                    <th scope="col">DiaChi</th>
+                    <th scope="col">NgayDangKy</th>
+                    <th scope="col">TrangThaiTiem</th>
+                    <th scope="col">ACTION</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item, rowStat : ${list}">
+                    <td class="text-center" th:text="${rowStat.count}"></td>
+                    <td th:text="${item.cccd}"></td>
+                    <td th:text="${item.hoTen}"></td>
+                    <td th:text="${item.ngaySinh}"></td>
+                    <td th:text="${item.gioiTinh}"></td>
+                    <td th:text="${item.soDienThoai}"></td>
+                    <td th:text="${item.email}"></td>
+                    <td th:text="${item.soTheBhyt}"></td>
+                    <td th:text="${item.ngheNghiep}"></td>
+                    <td th:text="${item.diaChi}"></td>
+                    <td th:text="${item.ngayDangKy}"></td>
+                    <td th:text="${item.trangThaiTiem}"></td>
+                    <td th:if="${item.trangThaiTiem == 2}">
+                        <span th:text="${'cho phep'}"></span>
+                    </td>
+
+                    <td th:if="${item.trangThaiTiem == 4}">
+                        <span th:text="${'Người này đã tiêm ' + item.soLanTiem + ' lần'}"></span>
+                    </td>
+
+                    <td th:if="${item.trangThaiTiem == 3}">
+                        <span th:text="${'nguoi nay da bi huy tiem'}"></span>
+                    </td>
+
+                    <td th:if="${item.trangThaiTiem == 1}">
+                        <!--                        <a-->
+                        <!--                                th:href="@{/sub/{id}(id=${item.cccd})}">-->
+                        <!--                            <button class="btn btn-outline-secondary color-icon">-->
+                        <!--                                <i class="fa-solid fa-pen-to-square"></i>-->
+                        <!--                            </button>-->
+                        <!--                        </a>-->
+
+                        <!--                                                <button type="button" class="btn btn-outline-secondary"-->
+                        <!--                                                        data-bs-toggle="modal" data-bs-tar="#exampleModal"-->
+                        <!--                                                        th:attr="data-item-id=${item.cccd}, data-item-name=${item.hoTen}, data-item-status=${2}"-->
+                        <!--                                                        onclick="showModalDelete(this.getAttribute('data-item-id'), this.getAttribute('data-item-name'), this.getAttribute('data-item-status'))">-->
+                        <!--                                                    <span>Approve</span>-->
+                        <!--                                                </button>-->
+
+                        <button type="button" class="btn btn-outline-secondary"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                th:attr="data-customer-id=${item.cccd}, data-customer-name=${item.hoTen}, data-customer-status=${2}"
+                                onclick="showModalDelete(this.getAttribute('data-customer-id'), this.getAttribute('data-customer-name'), this.getAttribute('data-customer-status'))">
+                            APPROVE
+                        </button>
+
+                        <button type="button" class="btn btn-outline-secondary"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                th:attr="data-customer-id=${item.cccd}, data-customer-name=${item.hoTen}, data-customer-status=${3}"
+                                onclick="showModalDelete(this.getAttribute('data-customer-id'), this.getAttribute('data-customer-name'), this.getAttribute('data-customer-status'))">
+                            CANCEL
+                        </button>
+
+
+                        <!--                        <button type="button" class="btn btn-outline-secondary"-->
+                        <!--                                data-bs-toggle="modal" data-bs-tar="#exampleModal"-->
+                        <!--                                th:attr="data-item-id=${item.cccd}, data-item-name=${item.hoTen}"-->
+                        <!--                                onclick="showModalDelete(this.getAttribute('data-item-id'), this.getAttribute('data-item-name'))">-->
+                        <!--                            <i class="fa-solid fa-trash"></i>-->
+                        <!--                        </button>-->
+
+
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+
+            <!--No record in database-->
+            <div th:if="${#lists.isEmpty(list)}" class="container">
+                <div class="row justify-content-center">
+                    <div class="col-6">
+                        <img src="https://i.giphy.com/media/HTSsuRrErs54g1Tqr5/giphy.webp">
+                        <div class="text-center">
+                            <p class="text-white">No result!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--        <div th:if="${not #lists.isEmpty(list)}" class="d-flex justify-content-center">-->
+        <!--            <table>-->
+        <!--                <tr class="d-flex justify-content-center">-->
+        <!--                    <td>-->
+        <!--                        <a th:if="${currentPage != 1}"-->
+        <!--                           th:href="@{/sub/search(page=${currentPage - 1}, searchName=${searchName}, searchAddress=${searchAddress})}">Previous</a>-->
+        <!--                        <span th:if="${currentPage == 1}" class="text-secondary">Previous</span>-->
+        <!--                    </td>-->
+        <!--                    <th:block th:each="i : ${#numbers.sequence(1, noOfPages)}">-->
+        <!--                        <td>-->
+        <!--                            <a th:if="${currentPage eq i}"-->
+        <!--                               th:text="${i}"-->
+        <!--                               class="text-white"></a>-->
+        <!--                            <a th:unless="${currentPage eq i}"-->
+        <!--                               th:href="@{/sub/search(page=${i}, searchName=${searchName}, searchAddress=${searchAddress})}"-->
+        <!--                               th:text="${i}"></a>-->
+        <!--                        </td>-->
+        <!--                    </th:block>-->
+        <!--                    <td>-->
+        <!--                        <a th:if="${currentPage != noOfPages}"-->
+        <!--                           th:href="@{/sub/search(page=${currentPage + 1}, searchName=${searchName}, searchAddress=${searchAddress})}">Next</a>-->
+        <!--                        <span th:if="${currentPage == noOfPages}" class="text-secondary">Next</span>-->
+        <!--                    </td>-->
+        <!--                </tr>-->
+        <!--            </table>-->
+        <!--        </div>-->
+
+    </div>
+
+    <br>
+
+</div>
+
+<input th:value="${message}" id="message" hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form th:action="@{/sub/update}"
+              method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body container-fluid">
+                    Do you want to delete <span id="delete_modal"></span>
+                    <input
+                            hidden="true" id="sendId" name="itemId"/>
+                    <input
+                            hidden="true" id="sendStatus" name="itemStatus"/>
+                    <span>?</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary"
+                            data-bs-dismiss="modal">Confirm
+                    </button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--THONG BAO HOAN TAT -->
+<div class="modal fade" id="modalAlert" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">SUCCESSFULLY!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body container-fluid">
+                    <p id="modalAlertMes"></p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary"
+                            data-bs-dismiss="modal">Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="commons/footer :: footer"></div>
+</body>
+<!--end thong bao sau khi delete -->
+
+
+<script>
+    window.onload = function () {
+        if ($('#message').val() != null && $('#message').val() != "") {
+            $("#modalAlertMes").html($('#message').val());
+            $(document).ready(function () {
+                $('#modalAlert').modal("show")
+            })
+        }
+    }
+</script>
+
+<!--<script>-->
+<!--    function showModalDelete(a, b, c) {-->
+<!--        document.getElementById("delete_modal").innerText = b;-->
+<!--        document.getElementById("sendId").value = a;-->
+<!--        document.getElementById("sendStatus").value = c;-->
+<!--    }-->
+<!--</script>-->
+
+
+<script>
+    function showModalDelete(a, b, c) {
+        document.getElementById("delete_modal").innerText = b;
+        document.getElementById("sendId").value = a;
+        document.getElementById("sendStatus").value = c;
+    }
+</script>
+
+
+<!-- Javascript files-->
+<!--<script src="/resources/js/bootstrap.min.js"></script>-->
+<!--<script src="/resources/js/jquery3.6.js"></script>-->
+</html>

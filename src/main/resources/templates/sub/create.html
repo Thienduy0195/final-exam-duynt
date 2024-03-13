@@ -255,7 +255,9 @@
 
         const codeRegex = /^CUS\d{5}$/;
 
-        if (value === "" || value === 0) {
+        const checkValue = value.trim();
+
+        if (checkValue === "" || checkValue === 0) {
             return "Required!";
         }
 

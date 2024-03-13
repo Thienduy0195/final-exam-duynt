@@ -11,8 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @Controller
@@ -109,11 +109,45 @@ public class SubController {
      */
     @GetMapping("/search")
     public String search(
-            @RequestParam(value = "searchName", required = true) String searchName, Model model) {
-        List<SubDTO> list = subService.search(searchName);
+            @RequestParam(value = "searchName", required = true) String searchName,
+            @RequestParam(value = "count", required = true) String count
+            , Model model) {
+        List<SubDTO> list = subService.search(searchName, count);
         model.addAttribute("searchName", searchName);
+        model.addAttribute("count", count);
         model.addAttribute("list", list);
         return "sub/list";
+    }
+
+    /**
+     * @param model
+     * @return
+     * @author DuyNT58
+     * @Author_birth_date: 1995-01-01
+     * @TODO
+     */
+    @GetMapping("/sub-list")
+    public String showSubList(Model model) {
+        List<SubDTO> list = subService.findAllMapDTO();
+        list.forEach(item -> System.out.println(item.toString()));
+        model.addAttribute("list", list);
+        return "sub/list2";
+    }
+
+    @PostMapping("/update")
+    public String deleteCustomer(@RequestParam String itemId, @RequestParam Integer itemStatus, Model model,
+                                 RedirectAttributes redirectAttributes) {
+        String message = "";
+        if (subService.modify(itemId, itemStatus)) {
+            if (itemStatus == 2) {
+                message = "Approve successfully";
+            }else {
+                message = "Cancel successfully";
+            }
+        }
+        redirectAttributes.addFlashAttribute("message",
+                message);
+        return "redirect:/sub/sub-list";
     }
 
 //    @GetMapping("/search")

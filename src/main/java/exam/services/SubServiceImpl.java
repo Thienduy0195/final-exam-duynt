@@ -28,6 +28,12 @@ public class SubServiceImpl implements ISubService {
         subMapper.updateByPrimaryKey(item);
     }
 
+    @Override
+    public Boolean modify(String id, Integer status) {
+        subMapper.modify(id, status);
+        return true;
+    }
+
     /**
      * @param item
      * @return
@@ -78,8 +84,8 @@ public class SubServiceImpl implements ISubService {
      * @TODO
      */
     @Override
-    public List<SubDTO> search(String option1) {
-        return subMapper.search("%" + option1 + "%");
+    public List<SubDTO> search(String option1, String option2) {
+        return subMapper.search("%" + option1 + "%", "%" + option2 + "%");
     }
 
     /**
@@ -98,6 +104,8 @@ public class SubServiceImpl implements ISubService {
 //        }
         return 0.f;
     }
+
+
 
 
 

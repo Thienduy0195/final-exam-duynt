@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -67,13 +68,13 @@ public class MainController {
     @PostMapping("/create")
     public String createNew(
             @Valid @ModelAttribute("mainDTO") MainDTO mainDTO,
-            BindingResult bindingResult, Model model) {
+            BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         System.out.println("MAIN POST");
         System.out.println("BEFORE" + mainDTO.toString());
-        System.out.println("SO LAN:" + mainService.countSL(subService.findById(mainDTO.getCccd())));
+        System.out.println("SO LAN:" + mainService.countSL(mainDTO.getCccd()));
         try {
             mainDTO.validate(mainDTO, bindingResult);
-            if (mainService.countSL(subService.findById(mainDTO.getCccd())) >= 3) {
+            if (mainService.countSL(mainDTO.getCccd()) >= 3) {
                 bindingResult.rejectValue("cccd", "error.cccd", "Nguoi nay da tiem du 3 lan, de nghi ban nhap thong tin tiem cho nguoi khac ");
             }
 
@@ -90,9 +91,10 @@ public class MainController {
             Person sub = subService.findById(mainDTO.getCccd());
             sub.setTrangThaiTiem(4);
             subService.update(sub);
-            main.setLanTiem(mainService.countSL(sub) + 1);
+            main.setLanTiem(mainService.countSL(mainDTO.getCccd()) + 1);
             System.out.println("AFTER" + main.toString());
             mainService.save(main);
+            redirectAttributes.addFlashAttribute("message", "Thêm mới thành công");
             return "redirect:/main/list";
         } catch (Exception e) {
             e.printStackTrace();

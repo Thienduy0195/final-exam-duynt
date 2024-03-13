@@ -404,7 +404,7 @@
              p.dia_chi,
              p.ngay_dang_ky,
              p.trang_thai_tiem,
-             count(tc.CCCD)          as so_lan_tiem,
+             count(tc.CCCD) as so_lan_tiem,
              Max(tc.ngay_tiem) as ngay_tiem_gan_nhat
       from Person p
              left join TiemChung tc
@@ -425,15 +425,22 @@
            p.dia_chi,
            p.ngay_dang_ky,
            p.trang_thai_tiem,
-           count(tc.CCCD)          as so_lan_tiem,
+           count(tc.CCCD) as so_lan_tiem,
            Max(tc.ngay_tiem) as ngay_tiem_gan_nhat
     from Person p
            left join TiemChung tc
                 on p.CCCD = tc.CCCD
     where p.ho_ten like #{searchName}
     group by p.CCCD, p.ho_ten, p.ngay_sinh, p.gioi_tinh, p.so_dien_thoai, p.email, p.so_the_BHYT, p.nghe_nghiep,
-             p.dia_chi, p.ngay_dang_ky, p.trang_thai_tiem;
+             p.dia_chi, p.ngay_dang_ky, p.trang_thai_tiem
+    having count(tc.CCCD) like #{count};
   </select>
 
+
+  <update id="modify" parameterType="map">
+    update Person
+    set trang_thai_tiem = #{status,jdbcType=INTEGER}
+    where CCCD = #{id,jdbcType=VARCHAR}
+  </update>
 
 </mapper>
